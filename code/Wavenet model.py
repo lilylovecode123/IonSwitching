@@ -145,13 +145,10 @@ def feature_selection(train, test):
 
 # Wavenet模型是一种序列生成模型，可以用于语音生成建模。在语音合成的声学模型建模中，Wavenet可以直接学习到采样值序列的映射，因此具有很好的合成效果。目前wavenet在语音合成声学模型建模，vocoder方面都有应用，在语音合成领域有很大的潜力。
 
-# ### 6.1.Dilation Convolutional layer 膨胀卷积层
 
-# ![img](dilatin.png)
 
 # Wavenet模型主要成分是这种卷积网络，每个卷积层都对前一层进行卷积，卷积核越大，层数越多，时域上的感知能力越强，感知范围越大。在生成过程中，每生成一个点，把该点放到输入层最后一个点继续迭代生成即可。
-# 
-# 由于语音的采样率高，时域上对感知范围要求大，我们采用了Dilated convolutions这种模型。Dilated convolutions加入了dilation这个概念，根据dilation大小选择连接的节点。比如dilation=1的时候，第二层只会使用第t，t - 2，t - 4......这些点。
+
 
 # ### 6.2 激活函数
 
@@ -176,8 +173,7 @@ def Classifier(shape_):
         x = Activation("relu")(x)
         return x
     
-    ## wavenet 模块，具体的可以看wavenet的参考资料
-    ## https://www.jianshu.com/p/bb13ae73e427
+    ## wavenet 模块
     def wave_block(x, filters, kernel_size, n):
         # 膨胀因子
         dilation_rates = [2**i for i in range(n)]
